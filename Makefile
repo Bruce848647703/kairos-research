@@ -1,8 +1,8 @@
 PY ?= python3
 
-.PHONY: help bootstrap test lint format clean check
+.PHONY: help bootstrap test lint format clean check synthesis
 help:
-	@echo "targets: bootstrap test lint format clean check"
+	@echo "targets: bootstrap test lint format clean check synthesis"
 
 bootstrap:
 	$(PY) -m venv .venv
@@ -10,6 +10,10 @@ bootstrap:
 
 test:
 	$(PY) -m pytest -q
+
+# 离线复现：读兄弟仓库 kairos-strategies 的四维产物，重算稳健性短名单
+synthesis:
+	$(PY) scripts/robustness.py
 
 # 离线校验：笔记齐全、来源标注、key_findings.csv 可读、README 索引文件存在
 check: test

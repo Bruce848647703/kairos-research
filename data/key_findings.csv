@@ -132,3 +132,17 @@ e2e_multi_asset risk_parity卡玛,0.8509,-,kairos-lab,research/e2e_multi_asset/R
 e2e_multi_asset风险Herfindahl,0.0825,-,kairos-lab,research/e2e_multi_asset/REPORT.md,组合每期波动0.0010年化0.0154加权平均波动0.0017
 e2e_multi_asset risk_parity历史VaR95每日,0.37,%,kairos-lab,research/e2e_multi_asset/REPORT.md,ES95每日0.63%修正VaR0.41%年化VaR95为5.82%
 e2e_multi_asset类别风险贡献cn_equity,38.82,%,kairos-lab,research/e2e_multi_asset/REPORT.md,global_equity27.14%cn_value18.35%bond8.10%commodity7.60%
+四维稳健性综合候选策略数,106,个,kairos-strategies,research/stress/stress_metrics.csv,真实回测/样本外验证/压力情景/相关矩阵四维均有数据 无缺失 由scripts/robustness.py实算
+通过四条硬门槛的策略数,13,个,kairos-strategies,research/real/VALIDATION_SUMMARY.md,门槛为真实夏普>0 且PSR>=0.90 且压力正收益情景>=4/6 且压力worst夏普>=-0.30
+压力worst夏普门槛淘汰数,77,个,kairos-strategies,research/stress/stress_metrics.csv,四条门槛中最紧 PSR<0.90淘汰65 压力正收益情景<4淘汰38 真实夏普<=0淘汰27
+综合稳健性评分第1名equal_weight_rebal,0.7949,-,kairos-strategies,research/real/records/equal_weight_rebal/result.json,真实夏普0.7851 回撤30.66% PSR0.9851 压力worst-0.0375 正收益情景5/6 参数敏感区间0.016
+综合稳健性评分第2名等权买入持有基准,0.7436,-,kairos-strategies,research/real/records/equal_weight_buy_hold/result.json,基准自身排第2 真实夏普0.7587 PSR0.9820 压力worst-0.0455 参数敏感区间0.000
+综合稳健性评分第8名turn_of_month,0.5064,-,kairos-strategies,research/real/records/turn_of_month/result.json,真实夏普0.8520 回撤12.09% PSR0.9916 压力worst-0.2679 正收益情景4/6 短名单内唯一非配置类
+短名单Top10去相关后保留数,2,个,kairos-strategies,research/tournament/correlation.csv,equal_weight_rebal与turn_of_month 两者相关0.4462 其余8个与已选相关>0.70标记冗余
+短名单内相关>0.70的策略对数,36,对,kairos-strategies,research/tournament/correlation.csv,共45对 中位相关0.9639 最高equal_weight_buy_hold与cppi为1.0000
+trailing_stop_overlay压力worst夏普,-0.3830,-,kairos-strategies,research/stress/stress_metrics.csv,真实夏普0.9618与PSR0.9956均为全场第1 但high_vol情景低于-0.30门槛被淘汰
+range_breakout压力worst夏普,-3.9589,-,kairos-strategies,research/stress/stress_metrics.csv,choppy情景崩塌 真实夏普0.8679 PSR0.9926仍被门槛淘汰 单维高分不等于稳健
+vol_target_taa压力worst夏普,-0.0215,-,kairos-strategies,research/stress/stress_metrics.csv,抗压榜第2但PSR0.8924<0.90被门槛淘汰 portfolio_vol_target与min_variance_alloc同理
+equal_weight_ensemble压力worst夏普,-1.6080,-,kairos-strategies,research/stress/stress_metrics.csv,参数敏感区间0.000最不敏感 PSR0.9773 仍因压力维崩塌被淘汰
+high_vol情景正收益策略数,8,个,kairos-strategies,research/stress/stress_metrics.csv,6情景中最难 worst情景分布为choppy42 high_vol41 sector_rotation11 crash5 trend_up4 bubble3
+锦标赛8个去相关精英中通过四维门槛数,2,个,kairos-strategies,research/tournament/selection.json,仅risk_parity_alloc综合第4与turn_of_month综合第8通过 其余6个倒在压力或PSR门槛

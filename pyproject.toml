@@ -11,8 +11,10 @@ requires-python = ">=3.9"
 license = { text = "MIT" }
 authors = [{ name = "Bruce848647703" }]
 keywords = ["quant", "research", "factor", "risk", "backtest", "documentation"]
-# 文档/分析仓库，无重依赖：仅测试用到 pandas 读取汇总表。
+# 文档/分析仓库，无重依赖：测试用 pandas 读汇总表，scripts/robustness.py 用 numpy+pandas
+# 离线交叉兄弟仓库的四维产物（只读）。
 dependencies = [
+    "numpy>=1.21",
     "pandas>=1.3",
 ]
 
