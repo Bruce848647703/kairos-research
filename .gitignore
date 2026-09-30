@@ -1,0 +1,11 @@
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+build/
+dist/
+.ipynb_checkpoints/
+.DS_Store
+
+# 本仓库为文档/分析仓库，notes/、data/、tests/ 均需入库，不忽略。

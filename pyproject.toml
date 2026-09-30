@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "kairos-research"
+version = "0.1.0"
+description = "Kairos Research —— 综合 Kairos 系列真实数据实验结果的研究结论报告集（文档/分析仓库）"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [{ name = "Bruce848647703" }]
+keywords = ["quant", "research", "factor", "risk", "backtest", "documentation"]
+# 文档/分析仓库，无重依赖：仅测试用到 pandas 读取汇总表。
+dependencies = [
+    "pandas>=1.3",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=7.0"]
+
+[tool.setuptools]
+# 本仓库不含可导入的 Python 包，仅文档、数据与离线测试。
+py-modules = []
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

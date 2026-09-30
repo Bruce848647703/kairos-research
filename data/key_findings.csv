@@ -1,0 +1,127 @@
+指标,值,单位,来源仓库,来源文件,备注
+A股标的数,38,只,kairos-data,kairos_data/universe.py,LIQUID_A_SHARES 8个行业
+ETF标的数,9,只,kairos-data,kairos_data/universe.py,ASSET_CLASS_ETFS 5个资产类别
+A股复权口径(最终),hfq(后复权),-,kairos-data,data/ashare/DATA_NOTICE.md,收益率正确价格水平放大
+A股主数据源,腾讯web.ifzq.gtimg.cn,-,kairos-data,data/ashare/DATA_NOTICE.md,回退源新浪
+A股面板交易日,1931,日,kairos-backtest,research/real_backtest/metrics.json,2018-10-16~2026-09-24
+ETF面板交易日,2353,日,kairos-portfolio,research/real_portfolio/REPORT.md,2017-01-18~2026-09-24
+黄金ETF回放bar数,3202,根,kairos-crypto,research/real_replay/metrics.json,2013-07-29~2026-09-24
+因子评价期限h,5,交易日,kairos-factor,research/real_factor/REPORT.md,远期收益区间(t→t+h]防未来
+因子最大绝对秩IC,0.0161,-,kairos-factor,research/real_factor/factor_ic.csv,momentum_20 clean·raw 低于0.03门槛
+momentum_20秩IC(clean·raw),0.0161,-,kairos-factor,research/real_factor/factor_ic.csv,1个月动量延续
+momentum_20重叠t(clean·raw),2.646,-,kairos-factor,research/real_factor/factor_ic.csv,重叠口径
+momentum_20非重叠t(clean·raw),1.471,-,kairos-factor,research/real_factor/factor_ic.csv,修正自相关后不显著
+momentum_60秩IC(clean·raw),-0.0082,-,kairos-factor,research/real_factor/factor_ic.csv,3个月反转量级可忽略
+非重叠t绝对值≥2的组合数,0,个,kairos-factor,research/real_factor/REPORT.md,16个组合中无一稳健显著
+lowvol_20秩IC(clean·neutral),-0.0041,-,kairos-factor,research/real_factor/factor_ic.csv,方向随预处理翻号
+lowvol_20多空(clean·neutral),-40.24,bp/期,kairos-factor,research/real_factor/quantile_returns.csv,低波组收益更高
+行业中性化平均绝对秩IC降幅,46,%,kairos-factor,research/real_factor/REPORT.md,0.0081(raw)降到0.0043(neutral)
+momentum_20分层Q5(clean·raw),47.47,bp/5日,kairos-factor,research/real_factor/quantile_returns.csv,最高分位组
+ML池化样本量,70908,条,kairos-ml,research/real_ml/metrics.json,日期×标的去预热后
+ML复权口径,hfq(后复权),-,kairos-ml,research/real_ml/metrics.json,只读kairos-data
+ML walk-forward折数,12,折,kairos-ml,research/real_ml/metrics.json,train500/test120
+ML purged折数,4,折,kairos-ml,research/real_ml/metrics.json,n_splits5 embargo5
+Ridge日频IC(walk-forward),-0.00005,-,kairos-ml,research/real_ml/metrics.json,t=-0.01无预测力
+Logistic hit_rate(walk-forward),0.5097,-,kairos-ml,research/real_ml/metrics.json,全表最高命中率
+Logistic日频IC t(walk-forward),0.599,-,kairos-ml,research/real_ml/metrics.json,最正向组合仍不显著
+GBM日频IC(walk-forward),-0.01632,-,kairos-ml,research/real_ml/metrics.json,显著为负t=-2.66
+GBM日频IC t(walk-forward),-2.663,-,kairos-ml,research/real_ml/metrics.json,系统性做错方向
+purged Logistic日频IC t,-2.338,-,kairos-ml,research/real_ml/metrics.json,显著为负
+ML日频IC t≥+2的组合数,0,个,kairos-ml,research/real_ml/REPORT.md,6个(模型×CV)组合中
+ML日频IC t≤-2的组合数,2,个,kairos-ml,research/real_ml/REPORT.md,GBM(wf)与Logistic(purged)
+裸因子rv10日频IC,-0.03963,-,kairos-ml,research/real_ml/metrics.json,低波动异象全表最强
+裸因子rv10 IC t,-5.002,-,kairos-ml,research/real_ml/metrics.json,强于任何模型打分
+裸因子rv20 IC t,-3.999,-,kairos-ml,research/real_ml/metrics.json,同为低波
+模型最大绝对IC,0.01632,-,kairos-ml,research/real_ml/REPORT.md,弱于裸rv10的0.03963
+H日收益为正自然占比,0.4714,-,kairos-ml,research/real_ml/REPORT.md,全押单边可得0.5286命中率
+Ridge逐折日频IC极差(wf),-0.0879~+0.0976,-,kairos-ml,research/real_ml/REPORT.md,6正6负跨折t=-0.05
+purged Logistic多头累计,1.137,-,kairos-ml,research/real_ml/metrics.json,同期等权基准0.482超额t=1.55
+ML运行耗时,107.8,秒,kairos-ml,research/real_ml/metrics.json,Python3.9.12 numpy2.0.2
+Ledoit-Wolf收缩δ,0.0055,-,kairos-portfolio,research/real_portfolio/REPORT.md,n2352远大于p9几乎无需收缩
+等权年化收益(ETF),7.91,%,kairos-portfolio,research/real_portfolio/REPORT.md,夏普0.630
+最大夏普组合夏普(ETF),1.976,-,kairos-portfolio,research/real_portfolio/REPORT.md,样本内对期望收益敏感
+均值方差年化收益(λ=15),10.75,%,kairos-portfolio,research/real_portfolio/REPORT.md,全场最高夏普1.461
+风险平价夏普(ETF静态),1.285,-,kairos-portfolio,research/real_portfolio/REPORT.md,DR2.143最高
+风险平价分散化比率DR(ETF),2.143,-,kairos-portfolio,research/real_portfolio/REPORT.md,全场最高
+风险平价sh511990权重,85.92,%,kairos-portfolio,research/real_portfolio/weights.csv,货币ETF低波腿主导
+最小方差sh511990权重,99.15,%,kairos-portfolio,research/real_portfolio/weights.csv,纯风险最小化≈持币
+风险平价成分风险最大偏离,6.57e-13,-,kairos-portfolio,research/real_portfolio/REPORT.md,每资产风险占比精确=1/9
+最大夏普sh511010权重,88.78,%,kairos-portfolio,research/real_portfolio/weights.csv,国债ETF为主干
+风险组合方案,inverse_vol,-,kairos-risk,research/real_risk/risk_metrics.json,静态权重不含调仓成本
+风险组合年化收益,10.87,%,kairos-risk,research/real_risk/risk_metrics.json,几何复利
+风险组合年化波动,14.88,%,kairos-risk,research/real_risk/risk_metrics.json,每期σ0.00937×√252
+风险组合夏普,0.730,-,kairos-risk,research/real_risk/risk_metrics.json,Sortino1.134
+风险组合超额峰度,4.4249,-,kairos-risk,research/real_risk/risk_metrics.json,肥尾正态为0
+95%历史VaR(每日),1.34,%,kairos-risk,research/real_risk/risk_metrics.json,≈134.3万元市值1亿
+99%历史ES(每日),3.46,%,kairos-risk,research/real_risk/risk_metrics.json,≈346.5万元
+99%CF修正VaR,3.15,%,kairos-risk,research/real_risk/risk_metrics.json,高于正态法2.13%
+99.9%POT VaR,4.98,%,kairos-risk,research/real_risk/risk_metrics.json,≈497.5万元正态法1.7倍
+分散化比率DR(A股组合),1.7718,-,kairos-risk,research/real_risk/risk_metrics.json,零相关上界√n=6.16的29%
+系统性方差占比,94.58,%,kairos-risk,research/real_risk/risk_metrics.json,单一市场因子
+组合市场beta,0.8503,-,kairos-risk,research/real_risk/risk_metrics.json,多头分散本质是市场敞口
+风险有效资产数,36.63,只,kairos-risk,research/real_risk/risk_metrics.json,名义38只
+成分风险可加性绝对误差,1.735e-18,-,kairos-risk,research/real_risk/risk_metrics.json,欧拉定理精确可加
+Hill尾指数ξ,0.4486,-,kairos-risk,research/real_risk/risk_metrics.json,±0.0324肥尾α=2.229
+GPD ξ,0.2139,-,kairos-risk,research/real_risk/risk_metrics.json,scipy_mle与Hill同号
+最大回撤MDD(A股组合),23.95,%,kairos-risk,research/real_risk/risk_metrics.json,Calmar0.4537
+水下时间占比,94.12,%,kairos-risk,research/real_risk/risk_metrics.json,回撤是常态
+最长水下持续期,1097,交易日,kairos-risk,research/real_risk/risk_metrics.json,≈4.4年
+市场-20%情景损益,-1700.5,万元,kairos-risk,research/real_risk/risk_metrics.json,市值1亿波动×1.8
+历史最差单日重放损益,-602.8,万元,kairos-risk,research/real_risk/risk_metrics.json,2020-02-03=99%VaR的2.4倍
+PSR,0.9827,-,kairos-risk,research/real_risk/risk_metrics.json,年化夏普0.7679样本1921期
+DSR(N=38),0.4804,-,kairos-risk,research/real_risk/risk_metrics.json,在38只里挑组合的打折
+DSR(N=100),0.3411,-,kairos-risk,research/real_risk/risk_metrics.json,门槛SR0抬到0.0578
+前复权裁剪丢弃早期价,23404,条,kairos-risk,research/real_risk/risk_metrics.json,起点2018-10-16非2016
+清洗后单日最大绝对收益,19.75,%,kairos-risk,research/real_risk/risk_metrics.json,落在涨跌停物理约束内
+向量化动量累计收益,106.37,%,kairos-backtest,research/real_backtest/metrics.json,夏普0.491
+等权买入持有累计收益,143.30,%,kairos-backtest,research/real_backtest/metrics.json,夏普0.659基准
+向量化动量最大回撤,55.22,%,kairos-backtest,research/real_backtest/metrics.json,深于基准44.92%
+等权买入持有最大回撤,44.92,%,kairos-backtest,research/real_backtest/metrics.json,动量未降反升回撤
+动量累计换手,85.89,x双边,kairos-backtest,research/real_backtest/metrics.json,成本拖累6.87%
+事件驱动双均线累计收益,95.29,%,kairos-backtest,research/real_backtest/metrics.json,sh600519夏普0.574
+双均线最大回撤,42.38,%,kairos-backtest,research/real_backtest/metrics.json,低于买入持有45.15%
+执行父单占窗口成交量,2.00,%,kairos-execution,research/real_execution/tca.json,BUY47245 sh600519
+执行窗口不利漂移,447.4,bp,kairos-execution,research/real_execution/tca.json,上行对BUY不利
+TWAP滑点(vs到达价),552.78,bp,kairos-execution,research/real_execution/tca.json,成交率100%
+TWAP相对基准VWAP,7.75,bp,kairos-execution,research/real_execution/tca.json,三者中最贴近基准
+VWAP相对基准VWAP,15.02,bp,kairos-execution,research/real_execution/tca.json,latency1滞后一根bar
+IS实现差额,-13.70,bp,kairos-execution,research/real_execution/tca.json,前重后轻三者最优
+IS窗口前1/3完成度,99.89,%,kairos-execution,research/real_execution/tca.json,最早锁定到达价
+三算法市场冲击(平方根模型),1.41,bp,kairos-execution,research/real_execution/tca.json,只计总参与率故相同
+lab执行demo TWAP实现差额,-124.28,bp,kairos-lab,research/execution_demo/REPORT.md,有利下行窗口TWAP最优
+lab执行demo VWAP相对市场价差,-22.78,bp,kairos-lab,research/execution_demo/REPORT.md,偏离基准最小
+加密实时源状态,不可达,-,kairos-crypto,research/real_replay/REPORT.md,binance被网络阻断禁联网
+回放标的,sh518880黄金ETF(hfq),-,kairos-crypto,research/real_replay/metrics.json,作通用价格序列验证引擎
+回放买入持有基准收益,234.58,%,kairos-crypto,research/real_replay/metrics.json,0.9920→3.3190
+momentum纸面总收益,125.32,%,kairos-crypto,research/real_replay/metrics.json,夏普0.57回撤32.48%
+grid纸面总收益,16.61,%,kairos-crypto,research/real_replay/metrics.json,底仓卖光夏普0.31回撤12.07%
+dca纸面总收益,149.98,%,kairos-crypto,research/real_replay/metrics.json,夏普0.70最高三策略均跑不赢基准
+策略总数,106,个,kairos-strategies,research/real/SUMMARY.md,失败0
+等权买入持有基准累计(策略),145.31,%,kairos-strategies,research/real/SUMMARY.md,夏普0.7587回撤31.21%
+最高夏普策略trailing_stop_overlay,0.9618,-,kairos-strategies,research/real/SUMMARY.md,累计113.13%回撤14.70%
+最低夏普策略liquidity_provision_ls,-3.0135,-,kairos-strategies,research/real/SUMMARY.md,累计-86.91%
+锦标赛相关性簇数,6,簇,kairos-strategies,research/tournament/REPORT.md,相关距离sqrt(0.5(1-ρ))
+最大簇cluster_1策略数,85,个,kairos-strategies,research/tournament/REPORT.md,多头方向性高度相关
+去相关精选策略数(corr<0.7),8,个,kairos-strategies,research/tournament/selection.json,贪心按夏普降序
+精英组合夏普,0.9329,-,kairos-strategies,research/tournament/selection.json,inverse_vol加权
+精英组合最大回撤,15.20,%,kairos-strategies,research/tournament/selection.json,基准31.21%减半
+精英组合累计收益,64.86,%,kairos-strategies,research/tournament/selection.json,低于基准145.31%
+多资产all_weather夏普,1.6665,-,kairos-strategies,research/real_multi/SUMMARY.md,最高回撤仅4.92%
+多资产all_weather最大回撤,4.92,%,kairos-strategies,research/real_multi/SUMMARY.md,卡玛1.1267
+多资产risk_parity_alloc夏普,1.0400,-,kairos-strategies,research/real_multi/SUMMARY.md,回撤1.81%
+多资产gtaa累计收益,113.06,%,kairos-strategies,research/real_multi/SUMMARY.md,夏普0.7223回撤13.73%
+多资产sixty_forty累计收益,73.25,%,kairos-strategies,research/real_multi/SUMMARY.md,夏普0.5910回撤20.44%
+验证最高PSR(trailing_stop_overlay),0.996,-,kairos-strategies,research/real/VALIDATION_SUMMARY.md,但正收益窗口仅33.33%
+验证PSR=0.000的策略数,7,个,kairos-strategies,research/real/VALIDATION_SUMMARY.md,均为高换手套利/做市/多空
+turn_of_month bootstrap夏普CI下界,0.23,-,kairos-strategies,research/real/VALIDATION_SUMMARY.md,CI下界0.23上界1.56显著为正
+equal_weight_rebal敏感性区间宽度,0.02,-,kairos-strategies,research/real/VALIDATION_SUMMARY.md,0.77~0.79对参数极稳
+e2e_equity factor组合累计,1.4224,-,kairos-lab,research/e2e_equity/REPORT.md,夏普0.6474回撤0.5683
+e2e_equity equal_weight累计,1.4531,-,kairos-lab,research/e2e_equity/REPORT.md,夏普0.7587回撤0.3121跑赢factor
+e2e_equity跨包秩IC最大绝对差,1.11e-16,-,kairos-lab,research/e2e_equity/REPORT.md,ml.ic与factor.rank_ic吻合
+e2e_equity mom60样本外秩IC,-0.0141,-,kairos-lab,research/e2e_equity/REPORT.md,符号保持比例仅0.5769
+e2e_multi_asset risk_parity夏普,1.1166,-,kairos-lab,research/e2e_multi_asset/REPORT.md,回撤0.0765
+e2e_multi_asset risk_parity最大回撤,7.65,%,kairos-lab,research/e2e_multi_asset/REPORT.md,等权24.06%
+e2e_multi_asset equal_weight夏普,0.6135,-,kairos-lab,research/e2e_multi_asset/REPORT.md,累计0.9077波动0.1256
+e2e_multi_asset横截面平均相关,0.2097,-,kairos-lab,research/e2e_multi_asset/REPORT.md,最小/最大-0.217/0.854
+e2e_multi_asset risk_parity DSR(5trials),0.9842,-,kairos-lab,research/e2e_multi_asset/REPORT.md,PSR0.9995
+e2e_multi_asset期末国债权重,91.12,%,kairos-lab,research/e2e_multi_asset/REPORT.md,不加杠杆时低波腿主导
