@@ -17,7 +17,8 @@
 
 ### 切换 hfq（后复权）的修复
 
-- **数据层修复**：`kairos-data` 的提交 `783b23c` 明确将复权口径 **qfq → hfq**——「前复权出负价/假收益，后复权干净」，解析器支持 `hfqday`，并重抓 38 股 + 9 ETF 校验 (来源: kairos-data git 提交 783b23c；kairos_data/ashare.py)。
+- **数据层修复**：`kairos-data` 的提交 `783b23c` 明确将复权口径 **qfq → hfq**——「前复权出负价/假收益，后复权干净」，解析器支持 `hfqday`，并重抓 38 股 + 9 ETF 校验（该提交当时的 ETF 池为 9 只，属历史事实） (来源: kairos-data git 提交 783b23c；kairos_data/ashare.py)。
+- **ETF 池其后已扩充**：`ASSET_CLASS_ETFS` 现为 **14 只 / 6 个资产类别**（新增 sh510050 上证50、sh510880 红利、sh513500 标普500、sh512100 中证1000、sh511260 十年国债；新增类别 `cn_value`），公共区间随之变为 **2017-08-24 ~ 2026-09-30、2210 个交易日**（起点由最晚上市的 sh511260 决定），hfq 口径与清洗规则不变 (来源: kairos-data/kairos_data/universe.py `ASSET_CLASS_ETFS`/`ASSET_CLASSES`；kairos-strategies/research/real_multi/NOTES.md；kairos-lab/research/e2e_multi_asset/REPORT.md)。
 - hfq（后复权）价格水平被放大，但**收益率正确**，适合特征/标签与回测研究；`DATA_NOTICE` 最终口径即为后复权 hfq (来源: kairos-data/data/ashare/DATA_NOTICE.md；kairos-ml/research/real_ml/metrics.json `"adjust": "hfq(后复权)"`)。
 - 各仓库口径：`kairos-ml` / `kairos-execution` / `kairos-crypto` / `kairos-lab` 用 **hfq**；`kairos-factor` / `kairos-backtest` / `kairos-risk` 的 REPORT 仍按 **qfq** 口径描述并附带修复机制（见下）。**跨仓库比较收益率时口径一致（都正确），但价格水平不可直接对齐。**
 

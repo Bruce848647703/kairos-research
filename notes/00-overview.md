@@ -14,11 +14,11 @@ Kairos 系列（`kairos-factor` / `kairos-ml` / `kairos-portfolio` / `kairos-ris
 | 池 | 标的数 | 复权 | 区间 | 交易日 | 来源 |
 |---|---|---|---|---|---|
 | A 股（`data/ashare`） | **38** 只大盘/中盘，8 个行业 | 后复权 hfq | 2018-10-16 ~ 2026-09-24 | **1931** | (来源: kairos-data/kairos_data/universe.py `LIQUID_A_SHARES`；kairos-data/data/ashare/DATA_NOTICE.md) |
-| 跨资产 ETF（`data/etf`） | **9** 只，5 个资产类别 | 后复权 hfq | 2017-01-18 ~ 2026-09-24 | **2353**（收益样本 2352） | (来源: kairos-data/kairos_data/universe.py `ASSET_CLASS_ETFS`；kairos-portfolio/research/real_portfolio/REPORT.md) |
+| 跨资产 ETF（`data/etf`） | **14** 只，6 个资产类别 | 后复权 hfq | 2017-08-24 ~ 2026-09-30 | **2210**（kairos-portfolio 平衡面板口径 2209、收益样本 2208） | (来源: kairos-data/kairos_data/universe.py `ASSET_CLASS_ETFS`；kairos-strategies/research/real_multi/NOTES.md；kairos-lab/research/e2e_multi_asset/REPORT.md；kairos-portfolio/research/real_portfolio/REPORT.md) |
 | 黄金 ETF（`sh518880`，单标的） | 1 | 后复权 hfq | 2013-07-29 ~ 2026-09-24 | **3202** bar | (来源: kairos-crypto/research/real_replay/metrics.json) |
 
 - A 股 8 个行业分组：consumer 6、finance 6、industrial 8、appliance 3、pharma 3、tech 4、auto_newenergy 4、energy_material 4 (来源: kairos-factor/research/real_factor/REPORT.md；kairos-data/kairos_data/universe.py `SECTORS`)。
-- ETF 5 个资产类别：cn_equity（沪深300/中证500/创业板）、global_equity（纳指/恒生/中概互联）、commodity（黄金）、bond（国债）、cash（货币） (来源: kairos-data/kairos_data/universe.py `ASSET_CLASSES`)。
+- ETF 6 个资产类别：cn_equity（沪深300/中证500/创业板/中证1000）、cn_value（上证50/红利）、global_equity（纳指/标普500/恒生/中概互联）、commodity（黄金）、bond（国债/十年国债）、cash（货币） (来源: kairos-data/kairos_data/universe.py `ASSET_CLASSES`；kairos-strategies/research/real_multi/NOTES.md)。
 - 数据源：腾讯公开行情接口 `web.ifzq.gtimg.cn`（主）/ 新浪 `money.finance.sina.com.cn`（回退），抓取代码 `kairos_data/ashare.py`（原创），字段 `date,open,high,low,close,volume` (来源: kairos-data/data/ashare/DATA_NOTICE.md)。
 
 ### 复权口径：最终统一到 hfq（后复权）
@@ -33,8 +33,9 @@ Kairos 系列（`kairos-factor` / `kairos-ml` / `kairos-portfolio` / `kairos-ris
 | kairos-ml | hfq | 池化样本 **70908**，有效日 1866 | H=5 标签，严格 purge (来源: kairos-ml/research/real_ml/metrics.json) |
 | kairos-risk | qfq + 涨跌停硬约束修复 | 收益样本 **1921**（2018-10-30 起） | 裁剪丢弃 23404 条早期价 (来源: kairos-risk/research/real_risk/risk_metrics.json) |
 | kairos-backtest | qfq | **1931** bar（约 7.66 年） | 向量化 + 事件驱动 (来源: kairos-backtest/research/real_backtest/metrics.json) |
-| kairos-portfolio | ETF | 2353 日 | long-only SLSQP (来源: kairos-portfolio/research/real_portfolio/REPORT.md) |
-| kairos-lab/e2e_multi_asset | ETF | 2354 日（至 2026-09-28） | 滚动再平衡 107 次 (来源: kairos-lab/research/e2e_multi_asset/REPORT.md) |
+| kairos-portfolio | ETF | 2209 日（2017-08-24 ~ 2026-09-29，收益样本 2208） | 14 只 ETF、long-only SLSQP (来源: kairos-portfolio/research/real_portfolio/REPORT.md) |
+| kairos-lab/e2e_multi_asset | ETF | 2210 日（2017-08-24 ~ 2026-09-30） | 14 资产、滚动再平衡 100 次 (来源: kairos-lab/research/e2e_multi_asset/REPORT.md) |
+| kairos-strategies/real_multi | ETF | 2210 期（2017-08-24 ~ 2026-09-30） | 14 资产、18 个策略、单边成本 0.05% (来源: kairos-strategies/research/real_multi/NOTES.md、SUMMARY.md) |
 
 > 诚实提示：各报告的「38 只 / 1931 日」是同一面板，但**因子/ML/风险因回看预热与公共窗口裁剪，有效截面数并不相同**（1866 / 1906 / 1921 / 70908 等）。跨仓库比较时以各自报告口径为准，不可直接对齐期数。
 
@@ -58,9 +59,9 @@ Kairos 系列（`kairos-factor` / `kairos-ml` / `kairos-portfolio` / `kairos-ris
 
 ## 结果（数据规模速览）
 
-- A 股池 38 只、1931 个交易日；ETF 池 9 只、2353 个交易日；黄金 ETF 单标的 3202 bar (来源: 各仓库 metrics/REPORT，见上表)。
+- A 股池 38 只、1931 个交易日；ETF 池 14 只（6 个资产类别）、2210 个交易日（2017-08-24 ~ 2026-09-30）；黄金 ETF 单标的 3202 bar (来源: 各仓库 metrics/REPORT，见上表)。
 - A 股横截面年化波动中位 0.2957、最小 0.1051（sh601398 工商银行）、最大 0.4743（sh603501 韦尔股份） (来源: kairos-risk/research/real_risk/risk_metrics.json)。
-- ETF 横截面平均相关系数 0.2097，最小/最大 -0.217 / 0.854 (来源: kairos-lab/research/e2e_multi_asset/REPORT.md)。
+- ETF（14 只）横截面平均相关系数 0.2390，最小/最大 -0.234 / 0.951；等权组合年化波动 0.1182 (来源: kairos-lab/research/e2e_multi_asset/REPORT.md)。
 
 ## 解读
 

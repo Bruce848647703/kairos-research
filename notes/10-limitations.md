@@ -5,7 +5,7 @@
 
 ## 背景 / 问题
 
-整套研究建立在「38 只 A 股 + 9 只 ETF」的真实但**有限**的样本上。要让结论可信，必须把幸存者偏差、单一 universe、过拟合/多重检验、成本缺失、数据口径等问题逐条摊开，并说明每条对结论的影响方向。
+整套研究建立在「38 只 A 股 + 14 只 ETF」的真实但**有限**的样本上。要让结论可信，必须把幸存者偏差、单一 universe、过拟合/多重检验、成本缺失、数据口径等问题逐条摊开，并说明每条对结论的影响方向。
 
 ## 七类局限（带真实证据）
 
@@ -16,9 +16,9 @@
 
 ### 2. 单一 universe / 单一区间（影响：不具普适性）
 
-- 仅 38 只 A 股（8 行业、单层约 8 只）+ 9 只 ETF；截面太小、统计噪声大，IC 的标准误本身就与信号量级相当 (来源: kairos-factor/research/real_factor/REPORT.md)。
+- 仅 38 只 A 股（8 行业、单层约 8 只）+ 14 只 ETF（6 个资产类别）；截面太小、统计噪声大，IC 的标准误本身就与信号量级相当 (来源: kairos-factor/research/real_factor/REPORT.md；kairos-data/kairos_data/universe.py)。
 - 区间 2018-10 ~ 2026-09 只覆盖一段特定行情（含 2019-2021 结构性行情与其后多轮回撤），结论**不具备跨市场/跨周期普适性** (来源: kairos-ml/research/real_ml/REPORT.md)。
-- 多资产仅 9 个资产、2354 个交易日，PSR/DSR 受样本长度限制 (来源: kairos-lab/research/e2e_multi_asset/REPORT.md)。
+- 多资产仅 14 个资产、2210 个交易日（2017-08-24 ~ 2026-09-30），PSR/DSR 受样本长度限制 (来源: kairos-lab/research/e2e_multi_asset/REPORT.md；kairos-strategies/research/real_multi/NOTES.md)。
 
 ### 3. 合成 vs 真实（影响：本系列全为真实，但有两处替代）
 
@@ -30,7 +30,7 @@
 - 各仓库一次检验大量组合且**未做多重检验校正**：factor 16 个（样本×因子×预处理）组合、ml 3 模型×2 CV×16 特征、strategies 106 个策略、tournament 从 106 里挑 8 个 (来源: kairos-factor/research/real_factor/REPORT.md；kairos-ml/research/real_ml/REPORT.md；kairos-strategies/research/tournament/REPORT.md)。
 - 在 5% 水平上，16 个组合本就期望出现约 1 个「假显著」，单看 t 值极易过拟合 (来源: kairos-factor/research/real_factor/REPORT.md)。
 - **量化代价**：同一历史夏普，PSR=0.983（N=1），但承认在 38 只里挑组合后 DSR 降到 0.480（N=38）、N=100 时仅 0.341（门槛 SR₀ 抬到 0.0578） (来源: kairos-risk/research/real_risk/risk_metrics.json `backtest.dsr`)。
-- 期望收益采用**已实现均值（前视）**，样本内最大夏普（1.976）对输入高度敏感、存在过拟合，实盘期望应显著更低 (来源: kairos-portfolio/research/real_portfolio/REPORT.md)。
+- 期望收益采用**已实现均值（前视）**，14 只 ETF 上的样本内最大夏普（**2.215**，sh511010 占 57.20%、年化收益 4.61%/波动 2.08%）对输入高度敏感、存在过拟合，实盘期望应显著更低 (来源: kairos-portfolio/research/real_portfolio/REPORT.md)。
 
 ### 5. 成本与约束缺失（影响：净收益远低于毛收益）
 

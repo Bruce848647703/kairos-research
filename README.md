@@ -6,7 +6,7 @@
 
 ## 研究计划总览
 
-Kairos 系列在同一批真实行情（38 只 A 股 + 9 只跨资产 ETF，来自 `kairos-data`，只读）上各自跑了独立实验。本仓库的工作是**阅读这些已提交的 `REPORT.md` / `metrics.json` / `*.csv`，抽取真实数字，按主题重组成 11 篇结论笔记**，并保证每个关键数字可溯源、每篇结论有「背景 → 数据与方法 → 结果 → 解读 → 局限」的统一结构。
+Kairos 系列在同一批真实行情（38 只 A 股 + 14 只跨资产 ETF，来自 `kairos-data`，只读）上各自跑了独立实验。本仓库的工作是**阅读这些已提交的 `REPORT.md` / `metrics.json` / `*.csv`，抽取真实数字，按主题重组成 11 篇结论笔记**，并保证每个关键数字可溯源、每篇结论有「背景 → 数据与方法 → 结果 → 解读 → 局限」的统一结构。
 
 研究方法上的三条自律：
 
@@ -26,7 +26,7 @@ Kairos 系列在同一批真实行情（38 只 A 股 + 9 只跨资产 ETF，来�
 - 真实 A 股组合（38 只 inverse_vol）的分散化被相关性吃掉：分散化比率 DR 仅 **1.77**（零相关上界 √n=6.16），**94.58%** 方差来自单一市场因子（组合 beta 0.85）。(来源: kairos-risk/research/real_risk/risk_metrics.json)
 - 该组合尾部显著肥于正态：Hill ξ=**0.449**、GPD ξ=0.214，99.9% POT VaR **4.98%**（≈497.5 万元）是正态法（2.85%）的 1.7 倍；MDD **23.95%**、水下时间 **94.12%**。(来源: kairos-risk/research/real_risk/risk_metrics.json)
 - 回测过拟合的代价：同一历史夏普 PSR=**0.983**，但承认是在 38 只里挑组合（N=38）后 DSR 降到 **0.480**、N=100 时仅 **0.341**。(来源: kairos-risk/research/real_risk/risk_metrics.json)
-- 多资产风险平价/全天候最稳健：真实 ETF 上 all_weather 夏普 **1.67**、MDD 4.92%，risk_parity 夏普 1.12、MDD 7.65%，而等权基准夏普仅 0.61、MDD 24.06%。(来源: kairos-strategies/research/real_multi/SUMMARY.md；kairos-lab/research/e2e_multi_asset/REPORT.md)
+- 多资产风险平价/全天候最稳健：扩到 14 只 ETF（6 个资产类别、2210 期）后，all_weather 夏普 **1.5169**、MDD **5.12%**，e2e 滚动 risk_parity 夏普 **1.3002**、MDD **6.55%**，而等权基准夏普仅 **0.5924**、MDD **17.06%**。(来源: kairos-strategies/research/real_multi/SUMMARY.md；kairos-lab/research/e2e_multi_asset/REPORT.md)
 - 106 策略锦标赛：去相关精英组合夏普 **0.93**、MDD **15.20%**，跑赢等权基准（夏普 0.76、MDD 31.21%）且回撤减半，但绝对收益（64.9%）不及基准（145.3%）——组合的价值在降回撤而非增收益。(来源: kairos-strategies/research/tournament/selection.json)
 - 真实 A 股向量化动量 Top5 **全面跑输**等权买入持有：累计 **106.37% vs 143.30%**、夏普 0.49 vs 0.66，且最大回撤更深（**55.22% vs 44.92%**）。(来源: kairos-backtest/research/real_backtest/metrics.json)
 - 加密实时源在采集环境不可达，改用真实黄金 ETF 历史 bar 回放：momentum/grid/dca 三策略纸面收益（+125%/+17%/+150%）**全部跑不赢**买入持有（**+234.58%**），会计四恒等式全过。(来源: kairos-crypto/research/real_replay/metrics.json)
@@ -35,7 +35,7 @@ Kairos 系列在同一批真实行情（38 只 A 股 + 9 只跨资产 ETF，来�
 
 | 笔记 | 主题 | 一句话结论 |
 |---|---|---|
-| [notes/00-overview.md](notes/00-overview.md) | 数据与方法总览 | 38 只 A 股 + 9 只 ETF、hfq 口径、防未来、各仓库成本设定与可复现 |
+| [notes/00-overview.md](notes/00-overview.md) | 数据与方法总览 | 38 只 A 股 + 14 只 ETF（6 个资产类别、2210 个交易日）、hfq 口径、防未来、各仓库成本设定与可复现 |
 | [notes/01-anomaly-map.md](notes/01-anomaly-map.md) | 异象/因子图谱 | 极短期反转、一个月动量、三个月再反转；低波是唯一稳健异象；近半信号是行业 beta |
 | [notes/02-ml-vs-factor.md](notes/02-ml-vs-factor.md) | ML vs 单因子 | ML 样本外无正向预测力，反而稀释了有效的低波单因子 |
 | [notes/03-multi-asset.md](notes/03-multi-asset.md) | 多资产配置 | 全天候/风险平价/GTAA/60-40 对比；风险平价不依赖期望收益故稳健，但绝对收益偏低 |
