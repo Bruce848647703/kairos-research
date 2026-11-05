@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "kairos-research"
-version = "0.1.0"
+version = "0.1.1"
 description = "Kairos Research —— 综合 Kairos 系列真实数据实验结果的研究结论报告集（文档/分析仓库）"
 readme = "README.md"
 requires-python = ">=3.9"
@@ -17,6 +17,11 @@ dependencies = [
     "numpy>=1.21",
     "pandas>=1.3",
 ]
+
+[project.urls]
+Homepage = "https://github.com/Bruce848647703/kairos-research"
+Source = "https://github.com/Bruce848647703/kairos-research"
+Issues = "https://github.com/Bruce848647703/kairos-research/issues"
 
 [project.optional-dependencies]
 dev = ["pytest>=7.0"]
